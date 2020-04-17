@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Switch, Route, useLocation } from "react-router-dom";
+import { First } from "./pages/First";
+import { Home } from "./pages/Home";
+import { Second } from "./pages/Second";
+import { Third } from "./pages/Third";
+import { Four } from "./pages/Four";
+import { Five } from "./pages/Five";
+import { About } from "./pages/About";
+import { Category } from "./pages/Category";
+
+function usePageViews() {
+  let location = useLocation();
+
+  React.useEffect(() => {
+    console.log("pageview--->", location, location.pathname);
+  }, [location]);
+}
 
 function App() {
+  usePageViews();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Switch>
+        <Route path='/first' component={First} />
+        <Route path='/second' component={Second} />
+        <Route path='/third' component={Third} />
+        <Route path='/four' component={Four} />
+        <Route path='/five' component={Five} />
+        <Route path='/about' component={About} />
+        <Route path='/category/:name' component={Category} />
+        <Route exact path='/' component={Home} />
+      </Switch>
     </div>
   );
 }
