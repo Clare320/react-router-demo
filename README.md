@@ -1,3 +1,5 @@
+[toc]
+
 路由深度定制
 
 路由配置组织方式
@@ -56,6 +58,8 @@ children: node // 单节点
 
 #### Route
 
+当地址跟`Route`路径匹配时才去渲染UI，否则渲染函数返回null。`Rotue`总时严格地渲染，即使渲染null。
+
 注意项：
 
 1. `Route`标签路径明确的放在前面
@@ -67,13 +71,52 @@ children: node // 单节点
 
 #### Link
 
-### NavLink
+用来声明导航。
 
-可使用`activeClassName`属性来标记高亮状态
+支持属性：
 
-### Redirect
+1. `to: string`：跳转的连接位置，由pathname,search,hash properties拼接
+2. `to: object`: `{pathname, serach, hash, state}`
+3. `to: function`: `to={location => (object/string)}`
+4. `replace: bool`:  设为true，替换导航栈中当前入口，而不是新增一个
+5. `innerRef: function | RefObject`
 
-重定向，强制导航
+> React Router 5.1及以后有效
+
+#### NavLink
+
+相比较`Link`，可以给组件添加样式属性。
+
+除`Link`支持属性外，还有
+
+1. `activeClassName: string`
+
+2. `activeStyle: object`
+
+3. `exact: bool` 为true时，只有完全匹配style才会应用到。
+
+4. `strict: bool`, 为true时，匹配验证的时候右侧斜杠会被考虑进去。
+
+5. `isActive: func` 验证匹配时做更多的逻辑
+
+6. `location: object` 默认和当前url来比较，也可设置这个属性来指定新的判断url
+
+7. `aria-current` **不明白**
+
+   `page, step, location, date, time, true`
+
+#### Redirect
+
+重定向，强制导航, 导航到一个新地址，并且在导航栈中覆盖当前地址。
+
+支持的属性：
+
+1. `to: string`
+2. `to: object`
+3. `push: bool` 为true时重定向将推出一个新入口，代替替换当前地址
+4. `exact: bool`
+5. `strict: bool` 等价于`Route`的strict
+6. `sensitive: bool` 等价于 `Route`的`sensitive`
 
 ## 服务端渲染
 
@@ -181,3 +224,7 @@ function App() {
 ### 使用 react-router-config
 
 [react-router-config](https://github.com/reacttraining/react-router/tree/master/packages/react-router-config)
+
+## 使用
+
+1. 页面可以使用`Link`，也可以使用`useHistory`来导航

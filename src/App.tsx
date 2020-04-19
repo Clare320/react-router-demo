@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, Redirect } from "react-router-dom";
 import { First } from "./pages/First";
 import { Home } from "./pages/Home";
 import { Second } from "./pages/Second";
@@ -31,7 +31,8 @@ function App() {
         <Route path='/five' component={Five} />
         <Route path='/about' component={About} />
         <Route path='/category/:name' component={Category} />
-        <Route exact path='/' component={Home} />
+        <Redirect exact from="/" to="/home"/>
+        <Route exact path='/home' component={Home} />
       </Switch>
     </div>
   );

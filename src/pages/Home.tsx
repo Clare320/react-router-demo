@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect, Link } from "react-router-dom";
 
 function Home() {
   const titles = [
@@ -37,6 +37,11 @@ function Home() {
           {item}
         </button>
       ))}
+      <div>
+        <Link to="/four">Four</Link>
+        {/* <Redirect to="/five" push /> */}
+      </div>
+
     </div>
   );
 }
