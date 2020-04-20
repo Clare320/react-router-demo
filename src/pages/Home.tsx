@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { useHistory, Redirect, Link } from "react-router-dom";
 
 function Home() {
@@ -29,6 +29,14 @@ function Home() {
     history.push(route);
   };
 
+  const handleSelectChange = (e: FormEvent) => {
+    const select = e.target as HTMLSelectElement;
+    const value = select.value;
+    // 处理cookie
+
+    document.cookie = "role=" + value;
+  };
+
   return (
     <div>
       <div>首页</div>
@@ -38,10 +46,22 @@ function Home() {
         </button>
       ))}
       <div>
-        <Link to="/four">Four</Link>
+        <Link to='/four'>Four</Link>
         {/* <Redirect to="/five" push /> */}
       </div>
-
+      <div>
+        <p>改变角色</p>
+        <select
+          name='改变角色'
+          id='role'
+          onChange={handleSelectChange}
+          defaultValue='visitor'
+        >
+          <option value='admin'>admin</option>
+          <option value='user'>user</option>
+          <option value='visitor'>visitor</option>
+        </select>
+      </div>
     </div>
   );
 }

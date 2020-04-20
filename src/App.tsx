@@ -1,14 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Switch, Route, useLocation, Redirect } from "react-router-dom";
-import { First } from "./pages/First";
-import { Home } from "./pages/Home";
-import { Second } from "./pages/Second";
-import { Third } from "./pages/Third";
-import { Four } from "./pages/Four";
-import { Five } from "./pages/Five";
-import { About } from "./pages/About";
-import { Category } from "./pages/Category";
+import { routes } from "./routes";
+import { RoleRoute } from "./RoleRoute";
 
 function usePageViews() {
   let location = useLocation();
@@ -21,18 +15,24 @@ function usePageViews() {
 function App() {
   usePageViews();
 
+  React.useEffect(() => {
+    // cookie存入游客身份
+    document.cookie = "role=visitor";
+  }, []);
+
   return (
     <div className='App'>
       <Switch>
-        <Route path='/first' component={First} />
-        <Route path='/second' component={Second} />
-        <Route path='/third' component={Third} />
-        <Route path='/four' component={Four} />
-        <Route path='/five' component={Five} />
-        <Route path='/about' component={About} />
-        <Route path='/category/:name' component={Category} />
-        <Redirect exact from="/" to="/home"/>
-        <Route exact path='/home' component={Home} />
+        {routes.map((item, index) => {
+          return (
+            <RoleRoute
+              key={"route" + index}
+              path={item.path}
+              role={item.role as [string]}
+              component={item.component}
+            />
+          );
+        })}
       </Switch>
     </div>
   );

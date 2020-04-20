@@ -52,11 +52,43 @@ children: node // 单节点
 
 > 区别就在于两者存储 url 和与服务器交互的方式不同
 
+#### MemoryRouter
+
+#### NativeRouter
+
+#### StaticRouter
+
+
+
 ### 路由匹配器
 
 #### Switch
 
+
+
 #### Route
+
+渲染组件的属性有三种：
+
+* `component: Component` 这种方式route会重新创建一个组件使用，当使用内联函数时每次渲染都会重新创建
+* `render: func` 使用内联函数时渲染不会重新创建，可以使用`Route`的所有属性
+* `children: func` 可以使用`Route`所有属性，工作原理跟render方式一样，无论是否匹配都会被调用
+
+> 优先级：children>component>render
+
+**疑问点：render跟children有啥区别？**
+
+```
+path: string | string[]
+exact: bool
+strict: bool
+location: object
+sensitive: bool
+```
+
+
+
+
 
 当地址跟`Route`路径匹配时才去渲染UI，否则渲染函数返回null。`Rotue`总时严格地渲染，即使渲染null。
 
@@ -118,6 +150,16 @@ children: node // 单节点
 5. `strict: bool` 等价于`Route`的strict
 6. `sensitive: bool` 等价于 `Route`的`sensitive`
 
+### location
+
+### match
+
+### matchPath
+
+### withRouter 
+
+
+
 ## 服务端渲染
 
 使用`StaticRouter`代替`BrowserRouter`
@@ -130,7 +172,7 @@ children: node // 单节点
 
 滚动复原
 
-#Philosophy
+## Philosophy
 
 ### Static Routing
 
@@ -228,3 +270,43 @@ function App() {
 ## 使用
 
 1. 页面可以使用`Link`，也可以使用`useHistory`来导航
+
+## 权限管理方案
+
+1. 有些页面需要权限才可进入，无权限的跳转到指定页面
+2. 有些模块有些权限显示，有些不显示
+3. 角色更新后权限更新
+
+#### 方案一
+
+1. 给每一条路由添加权限标识
+
+   ```react
+   authority: ['admin', 'user']
+   ```
+
+   
+
+2. 集中配置路由
+
+3. 自定义组件 封装Route，内部做角色验证
+
+4. 权限验证类似antd design pro处理
+
+   ```react
+   import { default as RenderAuthorize } from '@/components/Authorized';
+   import { getAuthority } from './authority';
+   
+   let Authorized = RenderAuthorize(getAuthority()); // eslint-disable-line
+   
+   // Reload the rights component
+   const reloadAuthorized = () => {
+     Authorized = RenderAuthorize(getAuthority());
+   };
+   
+   export { reloadAuthorized };
+   export default Authorized;
+   ```
+
+   
+
