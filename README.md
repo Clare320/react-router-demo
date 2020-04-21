@@ -152,6 +152,10 @@ sensitive: bool
 
 ### location
 
+```react
+{ pathname, search, hash, state }
+```
+
 ### match
 
 ### matchPath

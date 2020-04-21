@@ -10,20 +10,29 @@ interface Role {
 const RoleRoute = (props: Role) => {
   const Component = props.component;
   const cookieStr = document.cookie;
-  const roleCookie = cookieStr.split(";")[1];
-  const cookie = roleCookie.trim().replace("role=", "");
+  const cookies = cookieStr.split(";");
+  let cookie = null;
+  cookies.some((item) => {
+    if (item.includes("role")) {
+      cookie = item.trim().replace("role=", "");
+      return true;
+    }
+    return false;
+  });
+  console.log("cookieStr--->", cookieStr, cookie);
+
+  if (cookie === null) {
+    return <Route path={props.path} render={() => <Component />} />;
+  }
+  console.log("role--->", props.role, cookie);
 
   if (!props.role.includes(String(cookie))) {
     if (cookie === "visitor") {
-      console.log("---> redirect login");
-
       // 登录
       return <Redirect to='/login' />;
     } else if (cookie === "user") {
       //权限提示页
     }
-    console.log("---null render");
-
     return null;
   }
   return <Route path={props.path} render={() => <Component />} />;
