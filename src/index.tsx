@@ -5,14 +5,23 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
-  <BrowserRouter keyLength={7} forceRefresh={true}>
-    <React.StrictMode>
+function Entry() {
+  React.useEffect(() => {
+    console.log("设置游客身份2222");
+    // cookie存入游客身份
+    document.cookie = "role=visitor";
+  }, []);
+
+  return (
+    <BrowserRouter keyLength={7}>
+      {/* <React.StrictMode> */}
       <App />
-    </React.StrictMode>
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+      {/* </React.StrictMode> */}
+    </BrowserRouter>
+  );
+}
+
+ReactDOM.render(<Entry />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

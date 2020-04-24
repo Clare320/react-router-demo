@@ -15,13 +15,6 @@ function usePageViews() {
 function App() {
   usePageViews();
 
-  React.useEffect(() => {
-    console.log("设置游客身份");
-
-    // cookie存入游客身份
-    document.cookie = "role=visitor";
-  }, []);
-
   return (
     <div className='App'>
       <Switch>

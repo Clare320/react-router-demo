@@ -29,7 +29,7 @@ const RoleRoute = (props: Role) => {
   if (!props.role.includes(String(cookie))) {
     if (cookie === "visitor") {
       // 登录
-      return <Redirect to='/login' />;
+      return <Redirect to='/login' push />;
     } else if (cookie === "user") {
       //权限提示页
     }

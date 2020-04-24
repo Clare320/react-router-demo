@@ -5,7 +5,7 @@ function Login() {
   const history = useHistory();
 
   const handleLogin = () => {
-    document.cookie = "role=user";
+    document.cookie = "role=admin";
 
     history.goBack();
   };

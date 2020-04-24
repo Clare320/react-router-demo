@@ -74,6 +74,8 @@ children: node // 单节点
 * `render: func` 使用内联函数时渲染不会重新创建，可以使用`Route`的所有属性
 * `children: func` 可以使用`Route`所有属性，工作原理跟render方式一样，无论是否匹配都会被调用
 
+`render`和`children`这两种方式都可以获取`route props`来作为组件属性。`route props`包括`match`,`location`,`history`
+
 > 优先级：children>component>render
 
 **疑问点：render跟children有啥区别？**
@@ -313,4 +315,34 @@ function App() {
    ```
 
    
+
+## Q&A
+
+1. 每次切换路由时整个root节点都会重渲染
+
+   因为`BrowserRouter`把`forceRefresh`设置为true，每次切换都会强制刷新
+
+## kede-template
+
+### 结果
+
+### 方案，问题
+
+1. 路由是怎么匹配组件的
+
+   目前方案中在`generateRotue()`中直接返回`Route`，在`render()`方法中判断是否要登录和权限问题，遇到需要登录和权限不够返回的是`<Redirect />`，其它返回组件。
+
+   这里在`generateRoute()`直接处理是否登录，权限验证逻辑，`Route`的render()直接返回对应组件，会不会更好
+
+2. 面包屑如何更好跟路由绑定
+
+   读取配置路由数组，根据指定规则过滤出来菜单路由数组，每一项都设置name和path，包括子路由数组中元素
+
+## 盲点
+
+### Mock
+
+https://github.com/nuysoft/Mock/wiki
+
+
 

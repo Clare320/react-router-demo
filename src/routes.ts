@@ -7,6 +7,7 @@ import { About } from "./pages/About";
 import { Category } from "./pages/Category";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
+import ProfilePage from "./pages/profilePage";
 
 const routes = [
   {
@@ -66,11 +67,16 @@ const routes = [
     role: ["visitor"],
   },
   {
+    path: "/profile",
+    component: ProfilePage,
+    role: ["admin"],
+  },
+  {
     path: "/",
     exact: true,
     strict: true,
     component: Home,
-    role: ["admin", "user", "visitor"],
+    role: ["admin", "user"],
   },
 ];
 
