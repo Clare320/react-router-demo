@@ -21,6 +21,7 @@ function Home() {
     "About",
     "Category",
     "Profile",
+    "Testws",
   ];
 
   let history = useHistory();
@@ -122,7 +123,11 @@ function Home() {
             <div>
               <div>首页</div>
               {titles.map((item, index) => (
-                <button key={item + index} onClick={() => handleClick(index)}>
+                <button
+                  key={item + index}
+                  onClick={() => handleClick(index)}
+                  style={{ marginLeft: 6 }}
+                >
                   {item}
                 </button>
               ))}

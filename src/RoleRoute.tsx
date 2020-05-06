@@ -26,7 +26,7 @@ const RoleRoute = (props: Role) => {
   }
   console.log("role--->", props.role, cookie);
 
-  if (!props.role.includes(String(cookie))) {
+  if (props.role !== undefined && !props.role.includes(String(cookie))) {
     if (cookie === "visitor") {
       // 登录
       return <Redirect to='/login' push />;

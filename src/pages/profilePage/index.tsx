@@ -34,3 +34,8 @@ function ProfileTimeline() {
 export default ProfilePage;
 
 //Curious 好奇
+/**
+ * 1. fetch-on-render
+ * 2. fetch-then-render
+ * 3. render-as-you-fetch
+ */

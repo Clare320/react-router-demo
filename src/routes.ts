@@ -8,6 +8,7 @@ import { Category } from "./pages/Category";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import ProfilePage from "./pages/profilePage";
+import TestWebSocketPage from "./pages/webSocketPage";
 
 const routes = [
   {
@@ -70,6 +71,10 @@ const routes = [
     path: "/profile",
     component: ProfilePage,
     role: ["admin"],
+  },
+  {
+    path: "/testws",
+    component: TestWebSocketPage,
   },
   {
     path: "/",
